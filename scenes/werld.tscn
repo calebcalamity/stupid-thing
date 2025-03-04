@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://mo275rp6g1b"]
+
+[ext_resource type="PackedScene" uid="uid://cb4cxqu26s7i" path="res://scenes/Player.tscn" id="1_ox3qr"]
+[ext_resource type="Script" path="res://scenes/die.gd" id="2_vpcdf"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_fajyl"]
+size = Vector2(1050, 140)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qck4k"]
+size = Vector2(1049.5, 139)
+
+[node name="werld" type="Node2D"]
+
+[node name="william draper" parent="." instance=ExtResource("1_ox3qr")]
+position = Vector2(623, 376)
+
+[node name="Platform" type="StaticBody2D" parent="."]
+position = Vector2(-98, 37)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Platform"]
+position = Vector2(624, 542)
+mesh = SubResource("QuadMesh_fajyl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
+position = Vector2(623.25, 541.5)
+shape = SubResource("RectangleShape2D_qck4k")
+
+[node name="Platform" type="StaticBody2D" parent="Platform"]
+position = Vector2(867, -69)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Platform/Platform"]
+position = Vector2(624, 542)
+mesh = SubResource("QuadMesh_fajyl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform/Platform"]
+position = Vector2(623.25, 541.5)
+shape = SubResource("RectangleShape2D_qck4k")
+
+[node name="Node2D" type="Node2D" parent="."]
+script = ExtResource("2_vpcdf")
+
+[node name="Button" type="Button" parent="Node2D"]
+offset_left = 1858.0
+offset_top = 375.0
+offset_right = 1890.0
+offset_bottom = 406.0
+scale = Vector2(1.99999, 1.4)
+text = "die"
+
+[connection signal="pressed" from="Node2D/Button" to="Node2D" method="_on_button_pressed"]
